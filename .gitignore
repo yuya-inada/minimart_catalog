@@ -1,0 +1,16 @@
+node_modules/
+*.log
+.env
+
+# macOS特有の不要ファイル
+.DS_Store
+
+# npm/yarn ロックファイル（どちらか一方だけ使うならもう一方は無視）
+package-lock.json
+yarn.lock
+
+# エディタ系（例：VSCode）
+.vscode/
+
+# Reactビルド成果物（`npm run build` したときにできるもの）
+build/
