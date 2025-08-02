@@ -1,15 +1,11 @@
 <?php
 session_start();
-
 require "connection.php";
-
 function createSection($name){
     // connection
     $conn = connection();
-
     //SQL
     $sql = "INSERT INTO sections(name) VALUE('$name')";
-
     //Execution
     if($conn->query($sql)){
         //Success
@@ -24,22 +20,17 @@ function createSection($name){
 function getAllsections(){
     $conn = connection();
     $sql = "SELECT * FROM sections";
-
     if($result = $conn->query($sql)){
         return $result;
     }else{
         die("Error retrieving all sections:" . $conn->error);
     }
 }
-
 if(isset($_POST['btn_add'])){
     $name = $_POST['name'];
-
     createSection($name);
 }
 ?>
-
-
 
 <!doctype html>
 <html lang="en">
@@ -56,7 +47,6 @@ if(isset($_POST['btn_add'])){
     <?php
     include "main-nav.php";
     ?>
-    
         <main class="py-5">
             <div class="card w-25 mx-auto mb-5">
                 <div class="card-header bg-info text-white text-center">
@@ -74,8 +64,6 @@ if(isset($_POST['btn_add'])){
                     </form>
                 </div>
             </div>      
-
-            
             <div class="w-25 mx-auto">
                 <h5 class="text-muted">Section List</h5>
                 <table class="table table-hover mt-4">
@@ -106,13 +94,10 @@ if(isset($_POST['btn_add'])){
                         <?php
                         }
                         ?>
-
                     </tbody>
-
                 </table>
             </div>
         </main>
-
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     </body>

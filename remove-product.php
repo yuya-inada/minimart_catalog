@@ -7,7 +7,7 @@ $prod_row = getProduct($_GET['prod_id']);
 
 function getProduct($prod_id){
     $conn = connection();
-    $sql = "SELECT * FROM products WHERE id = $prod_id";
+    $sql = "SELECT * FROM products WHERE product_id = $prod_id";
 
     if($result = $conn->query($sql)){
         return $result->fetch_assoc();
@@ -57,7 +57,8 @@ include "main-nav.php";
     </div>
     <div class="card-body text-center">
         <i class="fas fa-exclamation-triangle text-warning display-4 d-block mb-2"></i>
-        <p class="fw-bold mb-0">Are you sure you want to dalete "<?= $prod_row['title']?>"?</p>
+        <p class="fw-bold mb-0">Are you sure you want to dalete ?</p>
+        <p class="mt-3">"<?= $prod_row['title']?>"</p>
     </div>
     <div class="row">
         <div class="col">

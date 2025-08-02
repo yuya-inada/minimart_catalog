@@ -1,6 +1,5 @@
 <?php
 require 'connection.php';
-
 function createUser($fn,$ln,$username,$pwd){
     $conn = connection();
     $secure_password = password_hash($pwd,PASSWORD_DEFAULT);
@@ -17,6 +16,7 @@ function createUser($fn,$ln,$username,$pwd){
     }
 }
 
+$error_message = '';
 if(isset($_POST['btn_sign_up'])){
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
@@ -30,14 +30,11 @@ if(isset($_POST['btn_sign_up'])){
         createUser($first_name,$last_name,$username,$pass);
     }else{
         //if does not match
-        echo '<p class="text-danger">Password and Password Confirm Does Not Match</p>';
+        $error_message = 'Password and Password Confirm Does Not Match.';
     }
 
 }
-
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,32 +46,34 @@ if(isset($_POST['btn_sign_up'])){
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body class="bg-light">
-    <div style="height: 100vh;">
-        <div class="row h-100 m-0">
+    <div>
+        <div class="row h-100" style="margin-top:120px;">
             <div class="card w-25 mx-auto p-0">
                 <div class="card-header text-success">
                     <h1 class="card-title h3 mb-0 text-center">
                         Create your account
                     </h1>
                 </div>
-
                 <div class="card-body">
+                    <?php if($error_message): ?>
+                        <p class="text-denger text-center"><?= $error_message ?></p>
+                    <?php endif ?>
                     <form method="post" action="">
                         <!-- First name input -->
                         <label for="first_name">First Name</label>
                         <input type="text" name="first_name" id="first_name" class="form-control mb-2" required placeholder=" Enter First name" autofocus>
                         <!-- Last name input -->
                         <label for="last_name">Last Name</label>
-                        <input type="text" name="last_name" id="last_name" class="form-control mb-2" required placeholder=" Enter last name" autofocus>
+                        <input type="text" name="last_name" id="last_name" class="form-control mb-2" required placeholder=" Enter last name">
                         <!-- username input -->
                         <label for="username">User Name</label>
                         <input type="text" name="username" id="username" class="form-control mb-2" required placeholder=" Enter Username" autofocus maxlength="15">
                         <!-- password input -->
                         <label for="password">Password</label>
-                        <input type="password" name="password" id="password" class="form-control mb-2" required placeholder=" Enter Password" autofocus>
+                        <input type="password" name="password" id="password" class="form-control mb-2" required placeholder=" Enter Password">
                         <!-- Confirm password input -->
                         <label for="confirm-password">Password</label>
-                        <input type="password" name="confirm_password" id="confirm-password" class="form-control mb-2" required placeholder=" Enter Password Again" autofocus required>
+                        <input type="password" name="confirm_password" id="confirm_password" class="form-control mb-2" required placeholder=" Enter Password Again" required>
                         <!-- submit button -->
                         <button type="submit" class="btn btn-success w-100" name="btn_sign_up">Sign Up</button>
                     </form>
@@ -88,15 +87,9 @@ if(isset($_POST['btn_sign_up'])){
                             </a>
                         </P>
                     </div>
-
                 </div>
             </div>
         </div>
-
-
     </div>
-
-
-    
 </body>
 </html>

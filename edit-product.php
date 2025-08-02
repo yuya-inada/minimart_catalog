@@ -10,7 +10,7 @@ function getSections(){
  if($result = $conn->query($sql)){
     return $result;
  }else{
-    die("Error retrieving product types:" . $conn->$error);
+    die("Error retrieving product types:" . $conn->error);
  }
 
 }
@@ -21,7 +21,7 @@ $prod_row = getProduct($prod_id);
 
  function getProduct($prod_id){
     $conn = connection();
-    $sql = "SELECT * FROM products WHERE id = $prod_id";
+    $sql = "SELECT * FROM products WHERE product_id = $prod_id";
 
     if($result = $conn->query($sql)){
         return $result->fetch_assoc();
@@ -74,7 +74,7 @@ if(isset($_POST['btn_save'])){
     ?>
     <main class="card w-25 mx-auto my-5">
         <div class="card-header bg-secondary text-white">
-            <h2 class="card-title h4 mb-0">Edit Product Details</h2>
+            <h2 class="card-title h4 mb-0 text-center">Edit Product Details</h2>
         </div>
         <div class="card-body">
             <form action="" method="post">
